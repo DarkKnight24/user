@@ -1,15 +1,19 @@
 package com.movie.user.service.impl;
 
 import com.movie.base.dto.UserBaseDto;
+import com.movie.base.utils.MD5Utils;
+import com.movie.user.dao.UserMapper;
+import com.movie.user.dto.UserLoginDto;
+import com.movie.user.entity.User;
+import com.movie.user.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
 import java.util.List;
-import com.movie.user.entity.User;
-import com.movie.user.dao.UserMapper;
-import com.movie.user.service.UserService;
+
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Resource
     private UserMapper userMapper;
@@ -21,6 +25,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public int insert(User record) {
+        record.setUserPwd(MD5Utils.MD5(record.getUserName() + record.getUserPwd()));
         return userMapper.insert(record);
     }
 
@@ -33,8 +38,8 @@ public class UserServiceImpl implements UserService{
     public UserBaseDto selectByPrimaryKey(Long userId) {
         UserBaseDto userBaseDto = new UserBaseDto();
         User user = userMapper.selectByPrimaryKey(userId);
-        if(user!=null){
-            BeanUtils.copyProperties(user,userBaseDto);
+        if (user != null) {
+            BeanUtils.copyProperties(user, userBaseDto);
         }
         return userBaseDto;
     }
@@ -54,4 +59,12 @@ public class UserServiceImpl implements UserService{
         return userMapper.updateBatchSelective(list);
     }
 
+    @Override
+    public Object login(UserLoginDto userLoginDto) {
+        User user = userMapper.selectByUserName(userLoginDto.getUserName());
+        if (MD5Utils.MD5(userLoginDto.getUserName() + userLoginDto.getUserPwd()).equals(user.getUserPwd())) {
+            return user;
+        }
+        return false;
+    }
 }

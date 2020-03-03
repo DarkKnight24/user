@@ -1,10 +1,12 @@
 package com.movie.user.service;
 
+import com.movie.base.dto.UserBaseDto;
+import com.movie.user.dto.UserLoginDto;
+import com.movie.user.entity.User;
+
 import java.util.List;
 
-import com.movie.base.dto.UserBaseDto;
-import com.movie.user.entity.User;
-public interface UserService{
+public interface UserService {
 
 
     int deleteByPrimaryKey(Long userId);
@@ -20,5 +22,7 @@ public interface UserService{
     int updateByPrimaryKey(User record);
 
     int updateBatchSelective(List<User> list);
+
+    Object login(UserLoginDto userLoginDto);
 
 }

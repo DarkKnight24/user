@@ -4,6 +4,7 @@ import com.movie.user.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+
 @Mapper
 public interface UserMapper {
     int deleteByPrimaryKey(Long userId);
@@ -19,4 +20,6 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     int updateBatchSelective(List<User> list);
+
+    User selectByUserName(String userName);
 }

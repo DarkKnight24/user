@@ -9,7 +9,6 @@ spring:
     url: jdbc:mysql://47.94.157.37:3306/movie?serverTimeZone=UTC&characterEncoding=UTF-8
     password: zy5201314.
 
-
 eureka:
   client:
     service-url:

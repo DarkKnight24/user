@@ -1,152 +1,157 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.movie.user.dao.UserMapper">
-  <resultMap id="BaseResultMap" type="com.movie.user.entity.User">
-    <!--@mbg.generated-->
-    <!--@Table user-->
-    <id column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
-    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
-    <result column="user_role" jdbcType="INTEGER" property="userRole" />
-    <result column="user_headImg" jdbcType="VARCHAR" property="userHeadImg" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    user_id, user_name, user_pwd, user_email, user_role, user_headImg
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
-    from user
-    where user_id = #{userId,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    <!--@mbg.generated-->
-    delete from user
-    where user_id = #{userId,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" keyColumn="user_id" keyProperty="userId" parameterType="com.movie.user.entity.User" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into user (user_name, user_pwd, user_email, 
-      user_role, user_headImg)
-    values (#{userName,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
-      #{userRole,jdbcType=INTEGER}, #{userHeadImg,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" keyColumn="user_id" keyProperty="userId" parameterType="com.movie.user.entity.User" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userName != null and userName != ''">
-        user_name,
-      </if>
-      <if test="userPwd != null and userPwd != ''">
-        user_pwd,
-      </if>
-      <if test="userEmail != null and userEmail != ''">
-        user_email,
-      </if>
-      <if test="userRole != null">
-        user_role,
-      </if>
-      <if test="userHeadImg != null and userHeadImg != ''">
-        user_headImg,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userName != null and userName != ''">
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="userPwd != null and userPwd != ''">
-        #{userPwd,jdbcType=VARCHAR},
-      </if>
-      <if test="userEmail != null and userEmail != ''">
-        #{userEmail,jdbcType=VARCHAR},
-      </if>
-      <if test="userRole != null">
-        #{userRole,jdbcType=INTEGER},
-      </if>
-      <if test="userHeadImg != null and userHeadImg != ''">
-        #{userHeadImg,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.movie.user.entity.User">
-    <!--@mbg.generated-->
-    update user
-    <set>
-      <if test="userName != null and userName != ''">
-        user_name = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="userPwd != null and userPwd != ''">
+    <resultMap id="BaseResultMap" type="com.movie.user.entity.User">
+        <!--@mbg.generated-->
+        <!--@Table user-->
+        <id column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="user_pwd" jdbcType="VARCHAR" property="userPwd"/>
+        <result column="user_email" jdbcType="VARCHAR" property="userEmail"/>
+        <result column="user_role" jdbcType="INTEGER" property="userRole"/>
+        <result column="user_headImg" jdbcType="VARCHAR" property="userHeadImg"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        user_id, user_name, user_pwd, user_email, user_role, user_headImg
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where user_id = #{userId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--@mbg.generated-->
+        delete from user
+        where user_id = #{userId,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" keyColumn="user_id" keyProperty="userId" parameterType="com.movie.user.entity.User"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into user (user_name, user_pwd, user_email,
+        user_role, user_headImg)
+        values (#{userName,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR},
+        #{userRole,jdbcType=INTEGER}, #{userHeadImg,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="user_id" keyProperty="userId" parameterType="com.movie.user.entity.User"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userName != null and userName != ''">
+                user_name,
+            </if>
+            <if test="userPwd != null and userPwd != ''">
+                user_pwd,
+            </if>
+            <if test="userEmail != null and userEmail != ''">
+                user_email,
+            </if>
+            <if test="userRole != null">
+                user_role,
+            </if>
+            <if test="userHeadImg != null and userHeadImg != ''">
+                user_headImg,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userName != null and userName != ''">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userPwd != null and userPwd != ''">
+                #{userPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="userEmail != null and userEmail != ''">
+                #{userEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="userRole != null">
+                #{userRole,jdbcType=INTEGER},
+            </if>
+            <if test="userHeadImg != null and userHeadImg != ''">
+                #{userHeadImg,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.movie.user.entity.User">
+        <!--@mbg.generated-->
+        update user
+        <set>
+            <if test="userName != null and userName != ''">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userPwd != null and userPwd != ''">
+                user_pwd = #{userPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="userEmail != null and userEmail != ''">
+                user_email = #{userEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="userRole != null">
+                user_role = #{userRole,jdbcType=INTEGER},
+            </if>
+            <if test="userHeadImg != null and userHeadImg != ''">
+                user_headImg = #{userHeadImg,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.movie.user.entity.User">
+        <!--@mbg.generated-->
+        update user
+        set user_name = #{userName,jdbcType=VARCHAR},
         user_pwd = #{userPwd,jdbcType=VARCHAR},
-      </if>
-      <if test="userEmail != null and userEmail != ''">
         user_email = #{userEmail,jdbcType=VARCHAR},
-      </if>
-      <if test="userRole != null">
         user_role = #{userRole,jdbcType=INTEGER},
-      </if>
-      <if test="userHeadImg != null and userHeadImg != ''">
-        user_headImg = #{userHeadImg,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where user_id = #{userId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.movie.user.entity.User">
-    <!--@mbg.generated-->
-    update user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      user_pwd = #{userPwd,jdbcType=VARCHAR},
-      user_email = #{userEmail,jdbcType=VARCHAR},
-      user_role = #{userRole,jdbcType=INTEGER},
-      user_headImg = #{userHeadImg,jdbcType=VARCHAR}
-    where user_id = #{userId,jdbcType=BIGINT}
-  </update>
-  <update id="updateBatchSelective" parameterType="java.util.List">
-    <!--@mbg.generated-->
-    update user
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="user_name = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.userName != null">
-            when user_id = #{item.userId,jdbcType=BIGINT} then #{item.userName,jdbcType=VARCHAR}
-          </if>
+        user_headImg = #{userHeadImg,jdbcType=VARCHAR}
+        where user_id = #{userId,jdbcType=BIGINT}
+    </update>
+    <update id="updateBatchSelective" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update user
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="user_name = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.userName != null">
+                        when user_id = #{item.userId,jdbcType=BIGINT} then #{item.userName,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="user_pwd = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.userPwd != null">
+                        when user_id = #{item.userId,jdbcType=BIGINT} then #{item.userPwd,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="user_email = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.userEmail != null">
+                        when user_id = #{item.userId,jdbcType=BIGINT} then #{item.userEmail,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="user_role = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.userRole != null">
+                        when user_id = #{item.userId,jdbcType=BIGINT} then #{item.userRole,jdbcType=INTEGER}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="user_headImg = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.userHeadImg != null">
+                        when user_id = #{item.userId,jdbcType=BIGINT} then #{item.userHeadImg,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where user_id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.userId,jdbcType=BIGINT}
         </foreach>
-      </trim>
-      <trim prefix="user_pwd = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.userPwd != null">
-            when user_id = #{item.userId,jdbcType=BIGINT} then #{item.userPwd,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="user_email = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.userEmail != null">
-            when user_id = #{item.userId,jdbcType=BIGINT} then #{item.userEmail,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="user_role = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.userRole != null">
-            when user_id = #{item.userId,jdbcType=BIGINT} then #{item.userRole,jdbcType=INTEGER}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="user_headImg = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.userHeadImg != null">
-            when user_id = #{item.userId,jdbcType=BIGINT} then #{item.userHeadImg,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-    </trim>
-    where user_id in
-    <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.userId,jdbcType=BIGINT}
-    </foreach>
-  </update>
+    </update>
+    <select id="selectByUserName" resultMap="BaseResultMap">
+        SELECT * FROM user WHERE user_name = #{userName,jdbcType=VARCHAR}
+    </select>
 </mapper>
