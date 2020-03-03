@@ -1,5 +1,7 @@
 package com.movie.user.service.impl;
 
+import com.movie.base.dto.UserBaseDto;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
@@ -28,8 +30,13 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User selectByPrimaryKey(Long userId) {
-        return userMapper.selectByPrimaryKey(userId);
+    public UserBaseDto selectByPrimaryKey(Long userId) {
+        UserBaseDto userBaseDto = new UserBaseDto();
+        User user = userMapper.selectByPrimaryKey(userId);
+        if(user!=null){
+            BeanUtils.copyProperties(user,userBaseDto);
+        }
+        return userBaseDto;
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.movie.user.service;
 
 import java.util.List;
+
+import com.movie.base.dto.UserBaseDto;
 import com.movie.user.entity.User;
 public interface UserService{
 
@@ -11,7 +13,7 @@ public interface UserService{
 
     int insertSelective(User record);
 
-    User selectByPrimaryKey(Long userId);
+    UserBaseDto selectByPrimaryKey(Long userId);
 
     int updateByPrimaryKeySelective(User record);
 

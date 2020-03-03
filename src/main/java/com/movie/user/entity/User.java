@@ -3,6 +3,7 @@ package com.movie.user.entity;
 import lombok.Builder;
 import lombok.Data;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
@@ -17,25 +18,25 @@ public class User {
     /**
     * 用户账号
     */
-    @NotNull
+    @NotNull(message = "用户名不能为空")
     private String userName;
 
     /**
     * 用户密码
     */
-    @NotNull
+    @NotNull(message = "用户密码不能为空")
     private String userPwd;
 
     /**
     * 用户邮箱
     */
-    @Email
+    @Email(message = "邮箱格式错误")
     private String userEmail;
 
     /**
     * 用户权限 0：普通会员 1：管理员
     */
-    @NotNull
+    @NotNull(message = "用户角色不能为空")
     private Integer userRole;
 
     /**
