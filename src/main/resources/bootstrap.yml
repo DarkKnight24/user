@@ -1,0 +1,10 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: UserBaseServer
+  cloud:
+    config:
+      uri: http://localhost:9999
+mybatis:
+  type-aliases-package: com.movie.user.entity
