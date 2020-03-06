@@ -1,14 +1,12 @@
 package com.movie.user.entity;
 
 import com.movie.base.constant.UserConstant;
-import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 @Data
-@Builder
 public class User {
     /**
      * user_id
