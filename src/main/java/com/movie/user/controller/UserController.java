@@ -1,6 +1,5 @@
 package com.movie.user.controller;
 
-import com.movie.base.dto.UserBaseDto;
 import com.movie.base.interfaces.UserClient;
 import com.movie.user.dto.UserLoginDto;
 import com.movie.user.entity.User;
@@ -42,7 +41,7 @@ public class UserController implements UserClient {
     @Override
     @GetMapping("detail/{userId}")
     @ResponseBody
-    public UserBaseDto getUserDetail(@PathVariable Long userId) {
+    public Object getUserDetail(@PathVariable Long userId) {
 
         return userService.selectByPrimaryKey(userId);
     }

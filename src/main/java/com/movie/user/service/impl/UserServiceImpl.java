@@ -1,18 +1,20 @@
 package com.movie.user.service.impl;
 
 import com.movie.base.dto.UserBaseDto;
+import com.movie.base.utils.BeanUtil;
 import com.movie.base.utils.MD5Utils;
 import com.movie.user.dao.UserMapper;
 import com.movie.user.dto.UserLoginDto;
 import com.movie.user.entity.User;
 import com.movie.user.service.UserService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class UserServiceImpl implements UserService {
 
     @Resource
@@ -39,7 +41,7 @@ public class UserServiceImpl implements UserService {
         UserBaseDto userBaseDto = new UserBaseDto();
         User user = userMapper.selectByPrimaryKey(userId);
         if (user != null) {
-            BeanUtils.copyProperties(user, userBaseDto);
+            BeanUtil.copyProperties(user, userBaseDto);
         }
         return userBaseDto;
     }
