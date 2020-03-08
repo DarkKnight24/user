@@ -8,6 +8,7 @@ import com.movie.user.dto.UserLoginDto;
 import com.movie.user.entity.User;
 import com.movie.user.service.UserService;
 import com.movie.file.utils.Utils;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +34,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public int insert(User record) {
         record.setUserPwd(MD5Utils.MD5(record.getUserName() + record.getUserPwd()));
-        return userMapper.insert(record);
+        int i;
+        try{
+            i = userMapper.insert(record);
+        }catch (Exception e){
+            return 0;
+        }
+        return i;
     }
 
     @Override
