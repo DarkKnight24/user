@@ -19,7 +19,7 @@ public interface UserService {
 
     int updateByPrimaryKeySelective(User record);
 
-    int updateByPrimaryKey(User record);
+    User updateByPrimaryKey(User record);
 
     int updateBatchSelective(List<User> list);
 

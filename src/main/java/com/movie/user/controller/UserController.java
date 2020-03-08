@@ -45,4 +45,11 @@ public class UserController implements UserClient {
 
         return userService.selectByPrimaryKey(userId);
     }
+
+    @PostMapping("upload")
+    @ResponseBody
+    public Object uploadUser(@RequestBody User user){
+        User recode = userService.updateByPrimaryKey(user);
+        return recode==null?false:recode;
+    }
 }

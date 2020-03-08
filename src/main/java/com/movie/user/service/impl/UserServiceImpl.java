@@ -7,6 +7,8 @@ import com.movie.user.dao.UserMapper;
 import com.movie.user.dto.UserLoginDto;
 import com.movie.user.entity.User;
 import com.movie.user.service.UserService;
+import com.movie.file.utils.Utils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private UserMapper userMapper;
+
+    @Autowired
+    Utils utils;
 
     @Override
     public int deleteByPrimaryKey(Long userId) {
@@ -52,8 +57,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int updateByPrimaryKey(User record) {
-        return userMapper.updateByPrimaryKey(record);
+    public User updateByPrimaryKey(User record) {
+        int i = userMapper.updateByPrimaryKeySelective(record);
+        record.setUserHeadImg(utils.getFileUrl(record.getUserHeadImg()));
+        return i>0?record:null;
     }
 
     @Override
@@ -65,7 +72,10 @@ public class UserServiceImpl implements UserService {
     public Object login(UserLoginDto userLoginDto) {
         User user = userMapper.selectByUserName(userLoginDto.getUserName());
         if (MD5Utils.MD5(userLoginDto.getUserName() + userLoginDto.getUserPwd()).equals(user.getUserPwd())) {
-            return user;
+            UserBaseDto userBaseDto = new UserBaseDto();
+            BeanUtil.copyProperties(user,userBaseDto);
+            userBaseDto.setUserHeadImg(utils.getFileUrl(userBaseDto.getUserHeadImg()));
+            return userBaseDto;
         }
         return false;
     }
