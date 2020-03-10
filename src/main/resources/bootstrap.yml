@@ -5,6 +5,6 @@ spring:
     name: UserBaseServer
   cloud:
     config:
-      uri: http://localhost:9999
+      uri: http://localhost:9999/config
 mybatis:
   type-aliases-package: com.movie.user.entity
