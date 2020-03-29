@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movie.user.dao.UserCinemaReleationMapper">
+  <resultMap id="BaseResultMap" type="com.movie.user.entity.UserCinemaReleation">
+    <!--@mbg.generated-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="cinema_id" jdbcType="BIGINT" property="cinemaId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="delete_mark" jdbcType="BIT" property="deleteMark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, cinema_id, user_id, delete_mark, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from user_cinema_releation
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from user_cinema_releation
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.movie.user.entity.UserCinemaReleation">
+    <!--@mbg.generated-->
+    insert into user_cinema_releation (id, cinema_id, user_id, 
+      delete_mark, create_time)
+    values (#{id,jdbcType=BIGINT}, #{cinemaId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{deleteMark,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.movie.user.entity.UserCinemaReleation">
+    <!--@mbg.generated-->
+    insert into user_cinema_releation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cinemaId != null">
+        cinema_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="deleteMark != null">
+        delete_mark,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cinemaId != null">
+        #{cinemaId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="deleteMark != null">
+        #{deleteMark,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.movie.user.entity.UserCinemaReleation">
+    <!--@mbg.generated-->
+    update user_cinema_releation
+    <set>
+      <if test="cinemaId != null">
+        cinema_id = #{cinemaId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="deleteMark != null">
+        delete_mark = #{deleteMark,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.movie.user.entity.UserCinemaReleation">
+    <!--@mbg.generated-->
+    update user_cinema_releation
+    set cinema_id = #{cinemaId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      delete_mark = #{deleteMark,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update user_cinema_releation
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="cinema_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.cinemaId,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="user_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.userId,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="delete_mark = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.deleteMark,jdbcType=BIT}
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" parameterType="map">
+    <!--@mbg.generated-->
+    insert into user_cinema_releation
+    (id, cinema_id, user_id, delete_mark, create_time)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id,jdbcType=BIGINT}, #{item.cinemaId,jdbcType=BIGINT}, #{item.userId,jdbcType=BIGINT}, 
+        #{item.deleteMark,jdbcType=BIT}, #{item.createTime,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" parameterType="com.movie.user.entity.UserCinemaReleation">
+    <!--@mbg.generated-->
+    insert into user_cinema_releation
+    (id, cinema_id, user_id, delete_mark, create_time)
+    values
+    (#{id,jdbcType=BIGINT}, #{cinemaId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{deleteMark,jdbcType=BIT}, 
+      #{createTime,jdbcType=TIMESTAMP})
+    on duplicate key update 
+    id = #{id,jdbcType=BIGINT}, 
+    cinema_id = #{cinemaId,jdbcType=BIGINT}, 
+    user_id = #{userId,jdbcType=BIGINT}, 
+    delete_mark = #{deleteMark,jdbcType=BIT}, 
+    create_time = #{createTime,jdbcType=TIMESTAMP}
+  </insert>
+  <insert id="insertOrUpdateSelective" parameterType="com.movie.user.entity.UserCinemaReleation">
+    <!--@mbg.generated-->
+    insert into user_cinema_releation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cinemaId != null">
+        cinema_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="deleteMark != null">
+        delete_mark,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cinemaId != null">
+        #{cinemaId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="deleteMark != null">
+        #{deleteMark,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cinemaId != null">
+        cinema_id = #{cinemaId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="deleteMark != null">
+        delete_mark = #{deleteMark,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+    <select id="selectByUserId" resultType="com.movie.user.dto.UserCinemaReleationDto">
+      SELECT a.user_id userId,a.cinema_id cinemaTypeId,b.cinema_type cinemaType,c.user_name
+      FROM user_cinema_releation a
+      LEFT JOIN cinema_type b ON a.cinema_id = b.cinema_id
+      LEFT JOIN user c ON a.user_id = c.user_id
+      WHERE
+      a.user_id=#{userId}
+      and a.delete_mark=false;
+    </select>
+</mapper>

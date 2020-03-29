@@ -1,7 +1,9 @@
 package com.movie.user.controller;
 
 
+import com.movie.base.utils.JsonUtil;
 import com.movie.base.utils.MD5Utils;
+import com.movie.user.dto.UserLoginDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,6 +22,13 @@ public class UserControllerTest {
 
     }
 
+    @Test void login(){
+        UserLoginDto dto = new UserLoginDto();
+        dto.setUserName("huahua");
+        dto.setUserPwd("zy5201314.");
+        Object login = userController.login(dto);
+        System.out.println(JsonUtil.toJson(login));
+    }
     @Test
     public void test() {
         String s = MD5Utils.MD5("test01123");

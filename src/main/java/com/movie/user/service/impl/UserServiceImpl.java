@@ -4,8 +4,11 @@ import com.movie.base.dto.UserBaseDto;
 import com.movie.base.utils.BeanUtil;
 import com.movie.base.utils.MD5Utils;
 import com.movie.user.dao.UserMapper;
+import com.movie.user.dto.UserCinemaDto;
+import com.movie.user.dto.UserCinemaReleationDto;
 import com.movie.user.dto.UserLoginDto;
 import com.movie.user.entity.User;
+import com.movie.user.service.UserCinemaReleationService;
 import com.movie.user.service.UserService;
 import com.movie.file.utils.Utils;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
@@ -24,7 +27,10 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Autowired
-    Utils utils;
+    private Utils utils;
+
+    @Autowired
+    private UserCinemaReleationService userCinemaReleationService;
 
     @Override
     public int deleteByPrimaryKey(Long userId) {
@@ -82,7 +88,13 @@ public class UserServiceImpl implements UserService {
             UserBaseDto userBaseDto = new UserBaseDto();
             BeanUtil.copyProperties(user,userBaseDto);
             userBaseDto.setUserHeadImg(utils.getFileUrl(userBaseDto.getUserHeadImg()));
-            return userBaseDto;
+            UserCinemaDto userCinemaDto = new UserCinemaDto();
+            BeanUtil.copyProperties(userBaseDto,userCinemaDto);
+            if(userBaseDto.getUserRole()==2){
+                UserCinemaReleationDto userCinemaReleationDto = userCinemaReleationService.selectByUserId(userBaseDto.getUserId());
+                BeanUtil.copyProperties(userCinemaReleationDto,userCinemaDto);
+            }
+            return userCinemaDto;
         }
         return false;
     }
