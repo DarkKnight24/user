@@ -154,4 +154,17 @@
     <select id="selectByUserName" resultMap="BaseResultMap">
         SELECT * FROM user WHERE user_name = #{userName,jdbcType=VARCHAR}
     </select>
+    <select id="findByParam" resultType="com.movie.user.dto.UserCinemaDto">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        <where>
+            <if test="role != null">
+                user_role = #{role}
+            </if>
+            <if test="userName != null">
+                user_name = #{userName}
+            </if>
+        </where>
+    </select>
 </mapper>

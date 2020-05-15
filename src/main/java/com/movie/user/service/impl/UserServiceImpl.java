@@ -8,15 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.movie.base.dto.UserBaseDto;
 import com.movie.base.utils.BeanUtil;
 import com.movie.base.utils.MD5Utils;
+import com.movie.base.utils.Page;
+import com.movie.base.utils.Util;
 import com.movie.file.utils.Utils;
 import com.movie.user.dao.UserMapper;
 import com.movie.user.dto.UserCinemaDto;
 import com.movie.user.dto.UserCinemaReleationDto;
 import com.movie.user.dto.UserLoginDto;
 import com.movie.user.entity.User;
+import com.movie.user.param.UserSelectParam;
 import com.movie.user.service.UserCinemaReleationService;
 import com.movie.user.service.UserService;
 
@@ -103,5 +108,25 @@ public class UserServiceImpl implements UserService {
             return userCinemaDto;
         }
         return false;
+    }
+    
+    @Override
+    public Page findByParam(UserSelectParam param, Page page) {
+        PageHelper.startPage(page);
+        List<UserCinemaDto> userBaseDtos = userMapper.findByParam(param);
+        userBaseDtos.forEach(p -> {
+            if (p.getUserRole() == 2) {
+                UserCinemaReleationDto userCinemaReleationDto =
+                    userCinemaReleationService.selectByUserId(p.getUserId());
+                if (Util.isEmpty(userCinemaReleationDto)) {
+                    return;
+                }
+                BeanUtil.copyProperties(userCinemaReleationDto, p);
+            }
+        });
+        PageInfo<UserCinemaDto> pageInfo = new PageInfo<>(userBaseDtos);
+        BeanUtil.copyProperties(pageInfo, page);
+        page.setList(userBaseDtos);
+        return page;
     }
 }
